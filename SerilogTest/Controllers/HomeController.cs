@@ -24,9 +24,9 @@ namespace SerilogTest.Controllers
 
         public IActionResult Index()
         {
-            _logger.LogError("this is a error");
+            _logger.LogError("this is a error");//add error 
             List<Log> logs = _context.Log.ToList();
-            throw new AbandonedMutexException();
+           
             
             return View();
         }

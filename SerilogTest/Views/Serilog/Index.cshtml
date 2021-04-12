@@ -1,0 +1,90 @@
+﻿@model SerilogTest.SearchSerilogModel
+@{
+}
+<div class="row">
+    <div class="js__card_content" id="show_items_area">
+        <div class="search-area row">
+            @using (Html.BeginForm())
+            {
+                <div class="col-sm-6">
+                    <span class="">نام:</span>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control margin-top-10", @placeholder = "نام " } })
+
+                </div>
+
+                <!-- /.frm-input -->
+              
+
+                <button type="submit" class="btn btn-info btn-search"> <i class="mdi mdi-magnify"></i>جستجو</button>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <ul>
+        @foreach (var item in Model.LinkPaging)
+        {
+
+            <li>
+                @item.Message
+            </li>
+           
+        }
+    </ul >
+</div>
+<div class="row">
+    <nav aria-label="Page navigation example " class="center center-block" style="text-align:center">
+
+        <ul class="pagination">
+            @{
+                <li class="page-item">
+                    @Html.ActionLink("ابتدا", "Index", "Serilog", new { page = 1, pagesize = 10, name = Model.Name, link = Model.Link }, null)
+                </li>
+                int next = Model.LinkPaging.PageIndex + 1;
+                int previous = Model.LinkPaging.PageIndex - 1;
+                if (Model.LinkPaging.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("قبلی", "Index", "Serilog", new { page = previous, pagesize = 10, name = Model.Name, link = Model.Link }, null)
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link disabled" role="button" disabled href="#" style="cursor: not-allowed; pointer-events: none;">قبلی</a></li>
+                }
+            }
+            @{
+                for (int j = Model.LinkPaging.PageIndex - 2; j < Model.LinkPaging.PageIndex + 3; j++)
+                {
+                    if (j <= 0)
+                    {
+                        continue;
+                    }
+                    if (j > Model.LinkPaging.TotalPages)
+                    {
+                        break;
+                    }
+                    <li class="page-item " id="">
+                        @if (j == Model.LinkPaging.PageIndex)
+                        {
+                            @Html.ActionLink(j.ToString(), "Index", "Serilog", new { page = j, pagesize = 10, name = Model.Name, link = Model.Link }, new { @class = "btn btn-info bg-info text-white" })
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink(j.ToString(), "index", "Serilog", new { page = j, pagesize = 10, name = Model.Name, link = Model.Link }, null)
+
+                        }
+                    </li>
+                }
+                if (Model.LinkPaging.HasNextPage)
+                {
+                    <li class="page-item">
+                        @Html.ActionLink("بعدی", "index", "Serilog", new { page = next, pagesize = 10, name = Model.Name, link = Model.Link }, null)
+                    </li>
+                }
+            }
+        </ul>
+    </nav>
+</div>

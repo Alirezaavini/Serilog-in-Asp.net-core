@@ -1,0 +1,1 @@
+﻿https://www.infoworld.com/article/3532012/how-to-use-serilog-to-log-application-data-to-sql-server-in-aspnet-core.html
