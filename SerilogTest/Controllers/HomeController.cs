@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Test;
 
 namespace SerilogTest.Controllers
 {
@@ -24,6 +25,7 @@ namespace SerilogTest.Controllers
 
         public IActionResult Index()
         {
+            Class1.testException();
             _logger.LogError("this is a error");//add error 
             List<Log> logs = _context.Log.ToList();
            

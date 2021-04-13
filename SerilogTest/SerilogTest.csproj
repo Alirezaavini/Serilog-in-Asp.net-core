@@ -26,4 +26,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Test\Test.csproj" />
+  </ItemGroup>
+
 </Project>
